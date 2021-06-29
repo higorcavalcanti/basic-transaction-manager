@@ -10,23 +10,18 @@
   </thead>
 
   <tbody>
-  <tr>
-    <td>+</td>
-    <td class="name-column">B</td>
-    <td class="value-column">C</td>
-  </tr>
-  <tr>
-    <td>-</td>
-    <td class="name-column">B</td>
-    <td class="value-column">C</td>
-  </tr>
+    <tr *ngFor="let transaction of (transactions$ | async)">
+      <td>{{ transaction?.type }}</td>
+      <td class="name-column">{{ transaction?.name }}</td>
+      <td class="value-column">{{ transaction?.value | currency:'BRL' }}</td>
+    </tr>
   </tbody>
 
   <tfoot>
   <tr>
     <th></th>
     <th class="name-column">Total</th>
-    <th class="value-column">R$ 123</th>
+    <th class="value-column">{{ (total$ | async) | currency:'BRL' }}</th>
   </tr>
   </tfoot>
 </table>

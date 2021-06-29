@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TransactionService } from '@core/services/transaction.service';
+import { Transaction } from '@core/models/transaction';
 
 @Component({
   selector: 'app-finance-form',
@@ -11,15 +13,25 @@ export class FinanceFormComponent implements OnInit {
   form!: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private transactionService: TransactionService,
   ) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      type: null,
-      name: null,
-      value: null
+      type: [null, Validators.required],
+      name: [null, Validators.required],
+      value: [null, Validators.required]
     });
   }
 
+  submit() {
+    this.form.markAllAsTouched();
+    if ( this.form.invalid ) {
+      return;
+    }
+
+    const transaction: Transaction = this.form.getRawValue();
+    this.transactionService.add(transaction);
+  }
 }

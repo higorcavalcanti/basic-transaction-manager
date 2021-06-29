@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TransactionService } from '@core/services/transaction.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-finance-list',
@@ -7,7 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FinanceListComponent implements OnInit {
 
-  constructor() { }
+  transactions$ = this.transactionService.transactions$;
+  total$ = this.transactions$?.pipe(
+    map(list => {
+      const sum = (previousValue: number | undefined, currentValue: number | undefined) => Number(previousValue ?? 0) + Number(currentValue ?? 0);
+
+      return list?.map(item => item.value)
+        ?.filter(value => value != null)
+        ?.reduce(sum)
+    })
+  );
+
+  constructor(
+    private transactionService: TransactionService
+  ) { }
 
   ngOnInit(): void {
   }
