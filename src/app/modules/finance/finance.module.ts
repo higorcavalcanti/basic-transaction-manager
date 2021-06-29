@@ -7,6 +7,8 @@ import { FinanceComponent } from './finance.component';
 import { FinanceFormComponent } from './finance-form/finance-form.component';
 import { FinanceListComponent } from './finance-list/finance-list.component';
 import { ErrorValidationModule } from '@higorcavalcanti/error-validation';
+import { TransactionTypeSelectorModule } from '@shared/components/transaction-type-selector/transaction-type-selector.module';
+import { PipesModule } from '@core/pipes/pipes.module';
 
 
 @NgModule({
@@ -20,6 +22,8 @@ import { ErrorValidationModule } from '@higorcavalcanti/error-validation';
     FinanceRoutingModule,
     ReactiveFormsModule,
     ErrorValidationModule,
+    TransactionTypeSelectorModule,
+    PipesModule,
   ]
 })
 export class FinanceModule { }

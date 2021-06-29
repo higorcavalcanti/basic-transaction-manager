@@ -30,8 +30,15 @@ export class FinanceFormComponent implements OnInit {
     if ( this.form.invalid ) {
       return;
     }
-
-    const transaction: Transaction = this.form.getRawValue();
+    const transaction: Transaction = this.getTransactionFromForm();
     this.transactionService.add(transaction);
+  }
+
+  getTransactionFromForm(): Transaction {
+    const form = this.form.getRawValue();
+    return {
+      ...form,
+      value: Number(form.value)
+    }
   }
 }

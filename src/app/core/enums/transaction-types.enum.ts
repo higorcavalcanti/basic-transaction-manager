@@ -1,4 +1,4 @@
 export enum TransactionTypesEnum {
-  SELL,
+  SELL = 1,
   BUY
 }

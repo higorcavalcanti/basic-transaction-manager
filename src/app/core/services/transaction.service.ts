@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Transaction } from '@core/models/transaction';
 import { StorageService } from '@core/services/storage.service';
+import { map } from 'rxjs/operators';
+import { TransactionTypesEnum } from '@core/enums/transaction-types.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,6 @@ import { StorageService } from '@core/services/storage.service';
 export class TransactionService {
 
   #transactions: BehaviorSubject<Transaction[]> = new BehaviorSubject<Transaction[]>( this.fromStorage() );
-  public transactions$: Observable<Transaction[]> = this.#transactions.asObservable();
 
   constructor(
     private storageService: StorageService
@@ -19,6 +20,21 @@ export class TransactionService {
     const current = this.#transactions.value ?? [];
     current.push(transaction);
     this.setTransactions(current);
+  }
+
+  getAll(): Observable<Transaction[]> {
+    return this.#transactions.asObservable();
+  }
+
+  getSum(): Observable<number> {
+    return this.getAll()?.pipe(
+      map(list => list?.reduce((acc, cur) => {
+        if ( !cur.value ) {
+          return 0;
+        }
+        return acc + cur.value * ( cur.type === TransactionTypesEnum.BUY ? 1 : -1 );
+      }, 0))
+    )
   }
 
   private setTransactions(value: Transaction[]) {

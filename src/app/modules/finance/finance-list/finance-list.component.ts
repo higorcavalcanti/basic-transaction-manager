@@ -9,16 +9,15 @@ import { map } from 'rxjs/operators';
 })
 export class FinanceListComponent implements OnInit {
 
-  transactions$ = this.transactionService.transactions$;
-  total$ = this.transactions$?.pipe(
-    map(list => {
-      const sum = (previousValue: number | undefined, currentValue: number | undefined) => Number(previousValue ?? 0) + Number(currentValue ?? 0);
-
-      return list?.map(item => item.value)
-        ?.filter(value => value != null)
-        ?.reduce(sum)
+  transactions$ = this.transactionService.getAll();
+  sum$ = this.transactionService.getSum().pipe(
+    map(sum => {
+      return {
+        total: Math.abs(sum),
+        profit: sum > 0
+      } as TotalInfo;
     })
-  );
+  )
 
   constructor(
     private transactionService: TransactionService
@@ -27,4 +26,9 @@ export class FinanceListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+}
+
+class TotalInfo {
+  total!: number;
+  profit!: boolean;
 }

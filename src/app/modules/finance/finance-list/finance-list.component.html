@@ -11,7 +11,7 @@
 
   <tbody>
     <tr *ngFor="let transaction of (transactions$ | async)">
-      <td>{{ transaction?.type }}</td>
+      <td>{{ transaction?.type | transactionType }}</td>
       <td class="name-column">{{ transaction?.name }}</td>
       <td class="value-column">{{ transaction?.value | currency:'BRL' }}</td>
     </tr>
@@ -21,7 +21,16 @@
   <tr>
     <th></th>
     <th class="name-column">Total</th>
-    <th class="value-column">{{ (total$ | async) | currency:'BRL' }}</th>
+    <th class="value-column">
+      <ng-container *ngIf="sum$ | async as sum">
+        <span>
+          {{ sum.total | currency:'BRL' }}
+        </span>
+        <small>
+          [{{ sum.profit ? 'LUCRO' : 'PREJUÍZO' }}]
+        </small>
+      </ng-container>
+    </th>
   </tr>
   </tfoot>
 </table>
