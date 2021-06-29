@@ -6,12 +6,19 @@
     flex-wrap: wrap;
     flex-direction: column;
 
+    border: 1px solid transparent;
+    border-radius: 5px;
+
     @include breakpoint-between(sm, md) {
       flex-direction: row;
 
       .name {
         flex-grow: 1;
       }
+    }
+
+    @include breakpoint-up(sm) {
+      border-color: #979797;
     }
 
     .add-button {

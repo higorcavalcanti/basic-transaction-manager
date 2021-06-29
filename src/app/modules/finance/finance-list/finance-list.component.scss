@@ -1,0 +1,19 @@
+:host {
+  h2 {
+    text-align: center;
+  }
+
+  table {
+    width: 100%;
+    text-align: left;
+
+    .name-column {
+      width: 100%;
+    }
+
+    .value-column {
+      text-align: right;
+      white-space: nowrap;
+    }
+  }
+}
