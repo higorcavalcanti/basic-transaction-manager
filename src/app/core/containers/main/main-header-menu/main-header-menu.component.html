@@ -1,0 +1,28 @@
+<div class="menu-large">
+  <nav>
+    <ul>
+      <li *ngFor="let option of options">{{ option }}</li>
+    </ul>
+  </nav>
+</div>
+
+<div class="menu-small">
+  <div class="menu-small-button">
+    <button (click)="openMenu()">O</button>
+  </div>
+
+  <div class="menu-small-options" *ngIf="menuOpen">
+    <div class="menu-small-options-close" (click)="closeMenu()">
+      <img src="assets/images/close.png" alt="close"/>
+    </div>
+    <ng-container *ngTemplateOutlet="menuOptions"></ng-container>
+  </div>
+</div>
+
+<ng-template #menuOptions>
+  <nav>
+    <ul>
+      <li *ngFor="let option of options" class="active">{{ option }}</li>
+    </ul>
+  </nav>
+</ng-template>

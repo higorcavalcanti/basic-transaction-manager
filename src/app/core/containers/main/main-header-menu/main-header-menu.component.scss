@@ -1,0 +1,68 @@
+@import "grid/functions";
+
+:host {
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .menu-large {
+    @include breakpoint-down(md) {
+      display: none;
+    }
+
+    ul {
+      display: flex;
+      background-color: white;
+
+      li {
+        padding: 0 1em;
+        margin: 0.5em 0;
+
+        &:not(:last-child) {
+          border-right: 1px solid #979797;
+        }
+      }
+    }
+  }
+
+  .menu-small {
+    @include breakpoint-up(md) {
+      display: none;
+    }
+
+    .menu-small-options-close {
+      padding: 1em;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .menu-small-options {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #333333;
+      bottom: 0;
+      width: 350px;
+
+      nav {
+        ul {
+          text-align: right;
+
+          li {
+            color: white;
+            padding: 0.5em 1em;
+            margin: 0;
+
+            cursor: pointer;
+
+            &:hover {
+              background-color: #C4C4C4;
+              color: #333333;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -5,13 +5,15 @@ import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
 import { MainHeaderComponent } from './main-header/main-header.component';
 import { MainFooterComponent } from './main-footer/main-footer.component';
+import { MainHeaderMenuComponent } from './main-header-menu/main-header-menu.component';
 
 
 @NgModule({
   declarations: [
     MainComponent,
     MainHeaderComponent,
-    MainFooterComponent
+    MainFooterComponent,
+    MainHeaderMenuComponent
   ],
   imports: [
     CommonModule,
