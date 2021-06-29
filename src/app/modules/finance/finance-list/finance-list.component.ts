@@ -14,7 +14,7 @@ export class FinanceListComponent implements OnInit {
     map(sum => {
       return {
         total: Math.abs(sum),
-        profit: sum > 0
+        profit: sum >= 0
       } as TotalInfo;
     })
   )
