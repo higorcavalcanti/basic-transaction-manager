@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { FinanceRoutingModule } from './finance-routing.module';
 import { FinanceComponent } from './finance.component';
@@ -15,7 +16,8 @@ import { FinanceListComponent } from './finance-list/finance-list.component';
   ],
   imports: [
     CommonModule,
-    FinanceRoutingModule
+    FinanceRoutingModule,
+    ReactiveFormsModule,
   ]
 })
 export class FinanceModule { }

@@ -1,1 +1,21 @@
-<p>finance-form works!</p>
+<form [formGroup]="form">
+
+  <div class="input-group">
+    <label for="type">Tipo da transação:</label>
+    <input type="text" id="type" name="type" formControlName="type"/>
+  </div>
+
+  <div class="input-group name">
+    <label for="name">Nome da mercadoria:</label>
+    <input type="text" id="name" name="name" formControlName="name"/>
+  </div>
+
+  <div class="input-group">
+    <label for="value">Valor:</label>
+    <input type="text" id="value" name="value" formControlName="value"/>
+  </div>
+
+  <div class="input-group add-button">
+    <button type="submit">Adicionar Transação</button>
+  </div>
+</form>
