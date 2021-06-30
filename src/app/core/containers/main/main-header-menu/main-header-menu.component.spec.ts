@@ -22,4 +22,17 @@ describe('MainHeaderMenuComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should open menu', () => {
+    expect(component.menuOpen).toBeFalse();
+    component.openMenu();
+    expect(component.menuOpen).toBeTrue();
+  });
+
+  it('should close menu', () => {
+    component.menuOpen = true;
+    expect(component.menuOpen).toBeTrue();
+    component.closeMenu();
+    expect(component.menuOpen).toBeFalse();
+  });
 });

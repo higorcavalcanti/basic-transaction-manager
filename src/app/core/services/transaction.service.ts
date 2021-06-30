@@ -10,24 +10,24 @@ import { TransactionTypesEnum } from '@core/enums/transaction-types.enum';
 })
 export class TransactionService {
 
-  #transactions: BehaviorSubject<Transaction[]> = new BehaviorSubject<Transaction[]>( this.fromStorage() );
+  _transactions: BehaviorSubject<Transaction[]> = new BehaviorSubject<Transaction[]>( this.fromStorage() );
 
   constructor(
-    private storageService: StorageService
+    protected storageService: StorageService
   ) { }
 
   add(transaction: Transaction) {
-    const current = this.#transactions.value ?? [];
+    const current = this._transactions.value ?? [];
     current.push(transaction);
     this.setTransactions(current);
   }
 
   getAll(): Observable<Transaction[]> {
-    return this.#transactions.asObservable();
+    return this._transactions.asObservable();
   }
 
   getSum(): Observable<number> {
-    return this.getAll()?.pipe(
+    return this.getAll().pipe(
       map(list => list?.reduce((acc, cur) => {
         if ( !cur.value ) {
           return 0;
@@ -37,16 +37,16 @@ export class TransactionService {
     )
   }
 
-  private setTransactions(value: Transaction[]) {
-    this.#transactions.next( value );
+  setTransactions(value: Transaction[]) {
+    this._transactions.next( value );
     this.toStorage(value);
   }
 
-  private fromStorage(): Transaction[] {
+  fromStorage(): Transaction[] {
     return this.storageService.get('transactions') ?? [];
   }
 
-  private toStorage(value: Transaction[]): void {
+  toStorage(value: Transaction[]): void {
     this.storageService.set('transactions', value);
   }
 }

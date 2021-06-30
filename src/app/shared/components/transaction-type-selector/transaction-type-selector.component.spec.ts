@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TransactionTypeSelectorComponent } from './transaction-type-selector.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('TransactionTypeSelectorComponent', () => {
   let component: TransactionTypeSelectorComponent;
@@ -8,7 +9,10 @@ describe('TransactionTypeSelectorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TransactionTypeSelectorComponent ]
+      declarations: [ TransactionTypeSelectorComponent ],
+      imports: [
+        ReactiveFormsModule
+      ]
     })
     .compileComponents();
   });

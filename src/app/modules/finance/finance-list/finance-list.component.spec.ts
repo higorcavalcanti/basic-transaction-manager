@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FinanceListComponent } from './finance-list.component';
+import { PipesModule } from '@core/pipes/pipes.module';
 
 describe('FinanceListComponent', () => {
   let component: FinanceListComponent;
@@ -8,7 +9,10 @@ describe('FinanceListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FinanceListComponent ]
+      declarations: [ FinanceListComponent ],
+      imports: [
+        PipesModule
+      ]
     })
     .compileComponents();
   });
